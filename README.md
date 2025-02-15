@@ -64,3 +64,41 @@ Frontend :
 
 Code source complet de l’application Vue.js avec TypeScript.
 Instructions d’installation et d’exécution.
+
+# Backend
+## Configuration
+
+Pour configurer le backend, suivez les étapes ci-dessous :
+
+1. Installez les dépendances du projet avec `bundle install` :
+
+```sh
+bundle install
+```
+
+2. Créez la base de données avec la commande suivante :
+
+```sh
+rails db:create
+```
+
+3. Appliquez les migrations de la base de données :
+
+```sh
+rails db:migrate
+```
+
+4. Lancez le serveur Rails :
+
+```sh
+rails s
+```
+
+# Frontend
+
+## Config
+Ajoutez un fichier `.env` dans le dossier frontend et définissez la variable `VITE_API_BASE_URL` avec l'URL du serveur Rails :
+
+```plaintext
+VITE_API_BASE_URL=http://localhost:3000
+```
