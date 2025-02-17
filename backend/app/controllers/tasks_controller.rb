@@ -38,7 +38,7 @@ class TasksController < ApplicationController
   private
 
   def sanitize_params
-    params[:task][:status] = params[:task][:status].to_i if params[:task][:status]
+    params[:task][:status] = Task.statuses[params[:task][:status]]
   end
 
   def task_params

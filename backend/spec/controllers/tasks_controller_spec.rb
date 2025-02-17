@@ -33,7 +33,7 @@ RSpec.describe TasksController, type: :controller do
     let(:task) { Task.create!(title: 'Existing Task') }
 
     it 'updates the requested task' do
-      put :update, params: { id: task.id, task: { title: 'Updated Task', status: 1 } }
+      put :update, params: { id: task.id, task: { title: 'Updated Task', status: "completed" } }
       task.reload
       expect(task.title).to eq('Updated Task')
       expect(task.status).to eq('completed')

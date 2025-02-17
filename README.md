@@ -1,4 +1,5 @@
 # tasks
+
 Application de gestion de tâches
 
 # Subject
@@ -66,6 +67,7 @@ Code source complet de l’application Vue.js avec TypeScript.
 Instructions d’installation et d’exécution.
 
 # Backend
+
 ## Configuration
 
 Pour configurer le backend, suivez les étapes ci-dessous :
@@ -88,7 +90,21 @@ rails db:create
 rails db:migrate
 ```
 
-4. Lancez le serveur Rails :
+4. Configurez CORS pour permettre les requêtes depuis le frontend. Ouvrez le fichier `config/initializers/cors.rb` et configurez-le comme suit :
+
+```ruby
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins 'http://localhost:5173' # Remplacez par l'URL de votre frontend
+
+    resource '*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head]
+  end
+end
+```
+
+5. Lancez le serveur Rails :
 
 ```sh
 rails s
@@ -97,6 +113,7 @@ rails s
 # Frontend
 
 ## Config
+
 Ajoutez un fichier `.env` dans le dossier frontend et définissez la variable `VITE_API_BASE_URL` avec l'URL du serveur Rails :
 
 ```plaintext
