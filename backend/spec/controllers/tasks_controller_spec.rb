@@ -1,9 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe TasksController, type: :controller do
+  let(:user) { User.create!(email: 'test@example.com', password: 'password') }
+
+  before do
+    sign_in user
+  end
+
   describe 'GET #index' do
-    let!(:task1) { Task.create!(title: 'Task 1') }
-    let!(:task2) { Task.create!(title: 'Task 2') }
+    let!(:task1) { user.tasks.create!(title: 'Task 1') }
+    let!(:task2) { user.tasks.create!(title: 'Task 2') }
 
     it 'returns both tasks' do
       get :index
@@ -13,7 +19,7 @@ RSpec.describe TasksController, type: :controller do
   end
 
   describe 'GET #show' do
-    let(:task) { Task.create!(title: 'Existing Task') }
+    let(:task) { user.tasks.create!(title: 'Existing Task') }
 
     it 'returns a success response' do
       get :show, params: { id: task.id }
@@ -30,7 +36,7 @@ RSpec.describe TasksController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let(:task) { Task.create!(title: 'Existing Task') }
+    let(:task) { user.tasks.create!(title: 'Existing Task') }
 
     it 'updates the requested task' do
       put :update, params: { id: task.id, task: { title: 'Updated Task', status: "completed" } }
@@ -41,7 +47,7 @@ RSpec.describe TasksController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:task) { Task.create!(title: 'Existing Task') }
+    let!(:task) { user.tasks.create!(title: 'Existing Task') }
 
     it 'destroys the requested task' do
       expect {

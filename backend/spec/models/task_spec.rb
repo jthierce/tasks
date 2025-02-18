@@ -1,16 +1,18 @@
 require 'rails_helper'
 
 describe Task, type: :model do
+  let(:user) { User.create!(email: 'test@example.com', password: 'password') }
+
   describe '.new' do
     context 'when provided with valid data' do
       it 'is valid' do
-        task = Task.new(title: 'Test Task', status: :pending)
+        task = Task.new(title: 'Test Task', status: :pending, user: user)
         expect(task).to be_valid
       end
 
       context 'when the title is missing' do
         it 'is not valid' do
-          task = Task.new(status: :pending)
+          task = Task.new(status: :pending, user: user)
           expect(task).to_not be_valid
           expect(task.errors[:title]).to include("can't be blank")
         end
@@ -18,14 +20,14 @@ describe Task, type: :model do
 
       context 'when the status is invalid' do
         it 'is not valid' do
-          expect { Task.new(title: 'Test Task', status: :invalid_status) }.to raise_error(ArgumentError)
+          expect { Task.new(title: 'Test Task', status: :invalid_status, user: user) }.to raise_error(ArgumentError)
         end
       end
     end
   end
 
   describe '#update' do
-    let(:task) { Task.create(title: 'Initial Task', status: :pending) }
+    let(:task) { user.tasks.create(title: 'Initial Task', status: :pending) }
 
     context 'when provided with valid data' do
       it 'updates the title successfully' do
