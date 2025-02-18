@@ -8,8 +8,8 @@
     <v-expansion-panel v-for="task in tasks" :key="task.id">
       <v-expansion-panel-title>
         <v-row>
-          <v-col cols="11">
-            <div class="font-weight-bold">{{ task.title }}</div>
+          <v-col cols="11 pr-10">
+            <div class="font-weight-bold text-truncate">{{ task.title }}</div>
           </v-col>
           <v-col cols="1">
             <div>{{ task.status }}</div>
@@ -18,7 +18,9 @@
       </v-expansion-panel-title>
 
       <v-expansion-panel-text>
-        <div>{{ task.description }}</div>
+        <div class="d-inline text-break">
+          {{ task.description }}
+        </div>
         <div class="d-flex justify-end mt-2">
           <v-btn color="primary" size="small" @click="openEditModal(task)" class="mr-2">Edit</v-btn>
           <v-btn color="error" size="small" @click="deleteTask(task.id)">Delete</v-btn>
