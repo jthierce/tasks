@@ -48,7 +48,7 @@
         <v-btn
           color="primary"
           @click="saveTask"
-          :disabled="!currentTask.status && !currentTask.title"
+          :disabled="!currentTask.status || !currentTask.title"
         >
           Save
         </v-btn>
