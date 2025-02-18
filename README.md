@@ -90,7 +90,9 @@ rails db:create
 rails db:migrate
 ```
 
-4. Configurez CORS pour permettre les requêtes depuis le frontend. Ouvrez le fichier `config/initializers/cors.rb` et configurez-le comme suit :
+4. Demandez le fichier `master.key` à l'administrateur du projet et placez-le dans le dossier `config`.
+
+5. Configurez CORS pour permettre les requêtes depuis le frontend. Ouvrez le fichier `config/initializers/cors.rb` et configurez-le comme suit :
 
 ```ruby
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
@@ -104,7 +106,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
 end
 ```
 
-5. Lancez le serveur Rails :
+6. Lancez le serveur Rails :
 
 ```sh
 rails s
